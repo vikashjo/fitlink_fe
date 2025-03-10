@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../api";
 
 const MealForm = () => {
   const [mealType, setMealType] = useState("");
@@ -9,12 +9,13 @@ const MealForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:3000/meals", {
+    // Use a relative URL so that the Axios instance's baseURL and interceptors are used.
+    api.post("/meals", {
       meal_type_id: mealType,
       meal_time: mealTime
     })
-    .then(() => navigate("/"))
-    .catch((error) => console.error("Error logging meal", error));
+      .then(() => navigate("/"))
+      .catch((error) => console.error("Error logging meal", error));
   };
 
   return (
