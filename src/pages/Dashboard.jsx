@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import api from "../api";
 import MacroSummary from "../pages/MacroSummary";
 import MacroTrendsChart from "../pages/MacroTrendsChart";
@@ -15,7 +14,7 @@ const Dashboard = () => {
     carbs: 0,
     fats: 0,
   });
-  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]);
   const [showMealForm, setShowMealForm] = useState(false);
 
   // Fetch meals based on date filter
@@ -118,7 +117,7 @@ const Dashboard = () => {
               {meals.map((meal) => (
                 <li key={meal.id} className="py-4">
                   <div className="flex justify-between items-center">
-                    <h3 className="font-bold text-lg">{meal.meal_type.name}</h3>
+                    <h3 className="font-bold text-lg">{meal.meal_type.name}{meal.meal}</h3>
                     <span className="text-gray-600 text-sm">{meal.meal_time}</span>
                   </div>
                   <div className="mt-2">
